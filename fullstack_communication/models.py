@@ -45,7 +45,7 @@ class Results(models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (('question_id', 'type_company'),)
+        unique_together = (('type_company', 'question_id'),)
 
 
 
