@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+# import json
 
 
 # Create your views here.
@@ -18,6 +18,11 @@ import json
 #         json.dumps(request.GET),
 #         content_type='application/javascript; charset=utf8'
 #     )
+
+
+def index(request):
+    return HttpResponse('Data Science API is online')
+    # return render(request, "index.html")
 
 
 @csrf_exempt
