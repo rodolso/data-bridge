@@ -1,7 +1,7 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
-
 
 class Companies(models.Model):
     company_id = models.IntegerField(primary_key=True)
@@ -13,11 +13,11 @@ class Formularios(models.Model):
     employee_id = models.IntegerField(primary_key=True)
     question_id = models.IntegerField()
     score = models.FloatField()
-    company_name = models.OneToOneField(Companies, on_delete=models.CASCADE)
-    datetime = models.DateField(blank=False)
+    company_name = models.ForeignKey(Companies, on_delete=models.CASCADE)
+    datetime = models.DateTimeField()
 
-    class Meta:
-        unique_together = (('employee_id', 'question_id', 'datetime'),)
+    # class Meta:
+    #     unique_together = (('employee_id', 'question_id', 'datetime',),)
 
 
 class Category(models.Model):
