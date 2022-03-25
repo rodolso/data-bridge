@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # import json
@@ -21,8 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
-    return HttpResponse('Data Science API is online')
-    # return render(request, "index.html")
+    return render(request, "base_ds.html")
 
 
 @csrf_exempt
