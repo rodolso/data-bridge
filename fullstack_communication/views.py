@@ -82,7 +82,7 @@ def get_ranking(request):
             "score": 9.0
         },
         {
-            "company_name": "Puntuación media",
+            "company_name": "Puntuación media CERS",
             "score": 6.4
         }
     ]
@@ -92,45 +92,54 @@ def get_ranking(request):
 def get_stats(request):
     stats_dict = [
         {
-            "category_id": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            "category_name": ["Compromiso",
-                              "Política y RSC",
-                              "Derechos Humanos",
-                              "Sostenibilidad Estructural",
-                              "Presupuesto Sostenibilidad",
-                              "Innovación",
-                              "Proveedores",
-                              "Medio Ambiente",
-                              "Personas",
-                              "Acción Social"
-                              ]
+            "category_id": 1,
+            "category_name": "Compromiso",
+            "score": [6.0, 9.0]
         },
         {
-            "company_name": "Puntuación media",
-            "mean_score": {1: 6.0,
-                           2: 5.5,
-                           3: 6.0,
-                           4: 5.5,
-                           5: 6.0,
-                           6: 5.5,
-                           7: 6.0,
-                           8: 5.5,
-                           9: 6.0,
-                           10: 5.5}
+            "category_id": 2,
+            "category_name": "Política y RSC",
+            "score": [6.0, 9.0]
         },
         {
-            "company_name": "Hasbulla Magomedov S.L.",
-            "mean_score": {1: 9.0,
-                           2: 9.0,
-                           3: 9.0,
-                           4: 9.0,
-                           5: 9.5,
-                           6: 8.5,
-                           7: 9.5,
-                           8: 8.5,
-                           9: 9.5,
-                           10: 8.5}
+            "category_id": 3,
+            "category_name": "Derechos Humanos",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 4,
+            "category_name": "Sostenibilidad Estructural",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 5,
+            "category_name": "Presupuesto Sostenibilidad",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 6,
+            "category_name": "Innovación",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 7,
+            "category_name": "Proveedores",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 8,
+            "category_name": "Medio Ambiente",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 9,
+            "category_name": "Personas",
+            "score": [6.0, 9.0]
+        },
+        {
+            "category_id": 10,
+            "category_name": "Acción Social",
+            "score": [6.0, 9.0]
         }
-
     ]
     return JsonResponse(stats_dict, safe=False)
