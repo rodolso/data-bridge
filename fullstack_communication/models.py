@@ -4,16 +4,16 @@ from django.db import models
 
 
 class Companies(models.Model):
-    company_id = models.IntegerField(primary_key=True)
-    company_name = models.CharField(max_length=20)
+    company_id = models.IntegerField()
+    company_name = models.CharField(max_length=20, primary_key=True)
     type_company = models.CharField(max_length=8)
 
 
 class Formularios(models.Model):
     employee_id = models.IntegerField()
     question_id = models.IntegerField()
-    score = models.FloatField()
-    company_name = models.ForeignKey(Companies, on_delete=models.CASCADE)
+    score = models.FloatField(null=True)
+    company_id = models.ForeignKey(Companies, on_delete=models.CASCADE)
     datetime = models.DateTimeField()
 
     class Meta:
@@ -29,10 +29,10 @@ class TypeResponses(models.Model):
     type_response = models.CharField(max_length=15)
     answer_id = models.IntegerField()
     answer_string = models.CharField(max_length=25)
-    score = models.FloatField()
+    score = models.FloatField(null=True)
 
-    class Meta:
-        unique_together = (('type_response', 'answer_id'),)
+    #class Meta:
+        #unique_together = (('type_response', 'answer_id'),)
 
 
 class Results(models.Model):
@@ -44,8 +44,8 @@ class Results(models.Model):
     type_response = models.ForeignKey(TypeResponses, on_delete=models.CASCADE)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    class Meta:
-        unique_together = (('type_company', 'question_id'),)
+    #class Meta:
+        #unique_together = (('type_company', 'question_id'),)
 
 
 
