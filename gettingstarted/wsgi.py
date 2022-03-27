@@ -1,5 +1,5 @@
 """
-WSGI config for main_module project.
+WSGI config for gettingstarted project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main_module.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gettingstarted.settings")
 
 from django.core.wsgi import get_wsgi_application
 
