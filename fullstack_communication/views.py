@@ -45,24 +45,95 @@ def post_answers(request):
 def get_form(request):
     form_dict = [
         {
-            "question_id": 1,
-            "question": "¿Ha establecido su empresa un diálogo con los grupos o partes interesadas en materia de sostenibilidad?",
-            "answer_id": [0, 1, 2, 3],
-            "answer": ["Nada", "Poco", "Medio", "Alto"]
+            "question": {
+                "id": 1,
+                "content": "¿Ha establecido su empresa un diálogo con los grupos o partes interesadas en materia de sostenibilidad?"
+            },
+            "answer": [
+                {
+                    "id": 1,
+                    "content": "Nada"
+                },
+                {
+                    "id": 2,
+                    "content": "Poco"
+                },
+                {
+                    "id": 3,
+                    "content": "Medio"
+                },
+                {
+                    "id": 4,
+                    "content": "Alto"
+                }
+            ]
         },
         {
-            "question_id": 2,
-            "question": "Por favor, describa en qué medida su empresa alinea sus acciones de sostenibilidad con los ODS:",
-            "answer_id": [0, 1, 2, 3, 4],
-            "answer": ["Nada", "Poco", "Medio", "Alto", "Muy alto"]
+            "question": {
+                "id": 2,
+                "content": "Por favor, describa en qué medida su empresa alinea sus acciones de sostenibilidad con los ODS:"
+            },
+            "answer": [
+                {
+                    "id": 1,
+                    "content": "Nada"
+                },
+                {
+                    "id": 2,
+                    "content": "Poco"
+                },
+                {
+                    "id": 3,
+                    "content": "Medio"
+                },
+                {
+                    "id": 4,
+                    "content": "Alto"
+                },
+                {
+                    "id": 5,
+                    "content": "Muy alto"
+                }
+            ]
         },
         {
-            "question_id": 3,
-            "question": "¿Su empresa forma parte de alguna alianza, organización o asociación de promoción de la sostenibilidad?",
-            "answer_id": [1, 0],
-            "answer": ["Sí", "No"]
+            "question": {
+                "id": 3,
+                "content": "¿Su empresa forma parte de alguna alianza, organización o asociación de promoción de la sostenibilidad?"
+            },
+            "answer": [
+                {
+                    "id": 1,
+                    "content": "No"
+                },
+                {
+                    "id": 2,
+                    "content": "Sí"
+                }
+            ]
         }
     ]
+
+    # form_dict = [
+    #     {
+    #         "question_id": 1,
+    #         "question": "¿Ha establecido su empresa un diálogo con los grupos o partes interesadas en materia de sostenibilidad?",
+    #         "answer_id": [0, 1, 2, 3],
+    #         "answer": ["Nada", "Poco", "Medio", "Alto"]
+    #     },
+    #     {
+    #         "question_id": 2,
+    #         "question": "Por favor, describa en qué medida su empresa alinea sus acciones de sostenibilidad con los ODS:",
+    #         "answer_id": [0, 1, 2, 3, 4],
+    #         "answer": ["Nada", "Poco", "Medio", "Alto", "Muy alto"]
+    #     },
+    #     {
+    #         "question_id": 3,
+    #         "question": "¿Su empresa forma parte de alguna alianza, organización o asociación de promoción de la sostenibilidad?",
+    #         "answer_id": [0, 1],
+    #         "answer": ["No", "Sí"]
+    #     }
+    # ]
     return JsonResponse(form_dict, safe=False)
 
 
