@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-# import json
-
+import json
+from fullstack_communication import models
+import sys
 
 # Create your views here.
 # As shown in the examples.
@@ -26,8 +27,15 @@ def index(request):
 
 @csrf_exempt
 def post_company(request):
-    # return HttpResponse('POST Company is online')
-    return JsonResponse(request.POST)  # it only fetches parameters from the BODY
+    q = dict(request.POST.items())
+
+    q['company_id'] = int(q['company_id'])
+
+    insert = models.Companies(**q)
+    insert.save()
+
+    return HttpResponse("Success!!")
+
 
 
 @csrf_exempt
@@ -38,8 +46,18 @@ def post_user(request):
 
 @csrf_exempt
 def post_answers(request):
-    # return HttpResponse('POST Answers is online')
-    return JsonResponse(request.POST)  # it only fetches parameters from the BODY
+    q = dict(request.POST.items())
+
+    print(q, sys.stdout)
+    q['employee_id'] = int(q['employee_id'])
+    q['question_id'] = int(q['question_id'])
+    q['answer_id'] = int(q['answer_id'])
+    q['company_id'] = models.Companies.objects.filter(company_id=q['company_id']).first()
+
+    insert = models.Formularios(**q)
+    insert.save()
+
+    return HttpResponse("Success!!")
 
 
 def get_form(request):

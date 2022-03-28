@@ -8,16 +8,19 @@ class Companies(models.Model):
     company_name = models.CharField(max_length=20, primary_key=True)
     type_company = models.CharField(max_length=8)
 
+    class Meta:
+        unique_together = (('company_id', 'company_name'),)
+
 
 class Formularios(models.Model):
     employee_id = models.IntegerField()
     question_id = models.IntegerField()
-    score = models.FloatField(null=True)
+    answer_id = models.IntegerField(null=True)
     company_id = models.ForeignKey(Companies, on_delete=models.CASCADE)
-    datetime = models.DateTimeField()
+    datetime = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = (('employee_id', 'question_id', 'datetime',),)
+        unique_together = (('employee_id', 'question_id'),)
 
 
 class Category(models.Model):
@@ -31,8 +34,8 @@ class TypeResponses(models.Model):
     answer_string = models.CharField(max_length=25)
     score = models.FloatField(null=True)
 
-    #class Meta:
-        #unique_together = (('type_response', 'answer_id'),)
+    class Meta:
+        unique_together = (('type_response', 'answer_id'),)
 
 
 class Results(models.Model):
@@ -44,8 +47,8 @@ class Results(models.Model):
     type_response = models.ForeignKey(TypeResponses, on_delete=models.CASCADE)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    #class Meta:
-        #unique_together = (('type_company', 'question_id'),)
+    class Meta:
+        unique_together = (('type_company', 'question_id'),)
 
 
 

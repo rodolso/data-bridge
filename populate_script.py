@@ -14,16 +14,18 @@ def insert(row: dict, model_class: ModelBase):
     
 [q.delete() for q in Companies.objects.all()]
 [q.delete() for q in Formularios.objects.all()]
+[q.delete() for q in Category.objects.all()]
+[q.delete() for q in TypeResponses.objects.all()]
+[q.delete() for q in Results.objects.all()]
     
-    
-companies = pd.read_excel('bbdd_test.xlsx', sheet_name='companies')
+companies = pd.read_excel('bbdd_project.xlsx', sheet_name='companies')
 companies_dict = companies.to_dict(orient='records')
 
 for row in companies_dict:
     insert(row, Companies)
 
     
-formularios = pd.read_excel('bbdd_test.xlsx', sheet_name='formularios')
+formularios = pd.read_excel('bbdd_project.xlsx', sheet_name='formularios')
 formularios['datetime'] = formularios['datetime'].astype(str)
 formularios_dict = formularios.to_dict(orient='records')
 
@@ -32,21 +34,21 @@ for row in formularios_dict:
     insert(row, Formularios)
     
 
-category = pd.read_excel('bbdd_test.xlsx', sheet_name='category')
+category = pd.read_excel('bbdd_project.xlsx', sheet_name='category')
 category_dict = category.to_dict(orient='records')
 
 for row in category_dict:
     insert(row, Category) 
     
 
-type_responses = pd.read_excel('bbdd_test.xlsx', sheet_name='type_responses')
+type_responses = pd.read_excel('bbdd_project.xlsx', sheet_name='type_responses')
 type_responses_dict = type_responses.to_dict(orient='records')
 
 for row in type_responses_dict:
     insert(row, TypeResponses)
     
     
-results = pd.read_excel('bbdd_test.xlsx', sheet_name='results')
+results = pd.read_excel('bbdd_project.xlsx', sheet_name='results')
 results_dict = results.to_dict(orient='records')
 
 for row in results_dict:
