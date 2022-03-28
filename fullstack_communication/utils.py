@@ -2,17 +2,32 @@ import pandas as pd
 import numpy as np
 import operator
 import json
+from fullstack_communication import models
 
 def load_results():
-    ...
+    results_df = pd.DataFrame(list(models.Results.objects.all().values()))
+    return results_df
+
+
 def load_formularios():
-    ...
+    formularios_df = pd.DataFrame(list(models.Formularios.objects.all().values()))
+    return formularios_df
+
+
 def load_type_responses():
-    ...
+    type_responses_df = pd.DataFrame(list(models.TypeResponses.objects.all().values()))
+    return type_responses_df
+
+
 def load_category():
-    ...
+    category_df = pd.DataFrame(list(models.Category.objects.all().values()))
+    return category_df
+
+
 def load_companies():
-    ...
+    companies_df = pd.DataFrame(list(models.Companies.objects.all().values()))
+    return companies_df
+
 
 def global_value_cers():
     df_results = load_results()
