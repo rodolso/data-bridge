@@ -6,11 +6,15 @@ from fullstack_communication import models
 
 def load_results():
     results_df = pd.DataFrame(list(models.Results.objects.all().values()))
+    results_df = results_df.rename(columns={'category_id_id':'category_id',
+                                            'question_id_id':'question_id',
+                                            'type_response_id': 'type_response'})
     return results_df
 
 
 def load_formularios():
     formularios_df = pd.DataFrame(list(models.Formularios.objects.all().values()))
+    formularios_df = formularios_df.rename(columns={'company_id_id':'company_id'})
     return formularios_df
 
 
