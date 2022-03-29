@@ -1,21 +1,26 @@
 import pandas as pd
+from django_pandas.io import read_frame
 import numpy as np
 import operator
 import json
 from fullstack_communication import models
 
+
 def load_results():
     results_df = pd.DataFrame(list(models.Results.objects.all().values()))
+    results_df = results_df.rename(columns={'question_id_id':'question_id', 'type_response_id':'type_response', 'category_id_id':'category_id'})
     return results_df
 
 
 def load_formularios():
     formularios_df = pd.DataFrame(list(models.Formularios.objects.all().values()))
+    formularios_df = formularios_df.rename(columns={'question_id_id': 'question_id', 'company_id_id': 'company_id'})
     return formularios_df
 
 
 def load_type_responses():
     type_responses_df = pd.DataFrame(list(models.TypeResponses.objects.all().values()))
+    type_responses_df = type_responses_df.rename(columns={'type_response_id':'type_reponse'})
     return type_responses_df
 
 
@@ -27,6 +32,16 @@ def load_category():
 def load_companies():
     companies_df = pd.DataFrame(list(models.Companies.objects.all().values()))
     return companies_df
+
+
+def load_questions():
+    questions_df = pd.DataFrame(list(models.Questions.objects.all().values()))
+    return questions_df
+
+
+def load_category_master():
+    category_master_df = pd.DataFrame(list(models.CategoryMaster.objects.all().values()))
+    return category_master_df
 
 
 def global_value_cers():
