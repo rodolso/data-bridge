@@ -48,10 +48,11 @@ def post_user(request):
 def post_answers(request):
     q = dict(request.POST.items())
 
-    print(q, sys.stdout)
     q['employee_id'] = int(q['employee_id'])
     q['question_id'] = int(q['question_id'])
+    q['question_id'] = models.Questions.objects.filter(question_id=q['question_id']).first()
     q['answer_id'] = int(q['answer_id'])
+    q['company_id'] = int(q['company_id'])
     q['company_id'] = models.Companies.objects.filter(company_id=q['company_id']).first()
 
     insert = models.Formularios(**q)
