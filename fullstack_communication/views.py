@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from fullstack_communication import models
+from fullstack_communication import utils
 import sys
 
 # Create your views here.
@@ -61,98 +62,19 @@ def post_answers(request):
 
 
 def get_form(request):
-    form_dict = [
-  {
-    "question": {
-      "id": 1,
-      "content": "\\u00bfHa establecido su empresa un di\\u00e1logo con los grupos o partes interesadas en materia de sostenibilidad?"
-    },
-    "answer": [
-      {
-        "id": 0,
-        "content": "nada"
-      },
-      {
-        "id": 1,
-        "content": "poco"
-      }]}]
 
+    form_dict = utils.form()
     return JsonResponse(form_dict, safe=False)
 
 
 def get_ranking(request):
-    ranking_dict = [
-        {
-            "company_name": "Lady Rogers S.A.",
-            "score": 9.2
-        },
-        {
-            "company_name": "Gerahara S.A.",
-            "score": 9.1
-        },
-        {
-            "company_name": "Hasbulla Magomedov S.L.",
-            "score": 9.0
-        },
-        {
-            "company_name": "Puntuación media CERS",
-            "score": 6.4
-        }
-    ]
+    ranking_dict = utils.ranking()
     return JsonResponse(ranking_dict, safe=False)
 
 
 def get_stats(request):
-    stats_dict = [
-        {
-            "category_id": 1,
-            "category_name": "Compromiso",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 2,
-            "category_name": "Política y RSC",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 3,
-            "category_name": "Derechos Humanos",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 4,
-            "category_name": "Sostenibilidad Estructural",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 5,
-            "category_name": "Presupuesto Sostenibilidad",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 6,
-            "category_name": "Innovación",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 7,
-            "category_name": "Proveedores",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 8,
-            "category_name": "Medio Ambiente",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 9,
-            "category_name": "Personas",
-            "score": [6.0, 9.0]
-        },
-        {
-            "category_id": 10,
-            "category_name": "Acción Social",
-            "score": [6.0, 9.0]
-        }
-    ]
+    x = int(request.GET.get("company_id"))
+    print(x, sys.stdout)
+    stats_dict = utils.cers_vs_company_categories(x)
     return JsonResponse(stats_dict, safe=False)
+

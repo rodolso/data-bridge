@@ -20,7 +20,7 @@ def load_formularios():
 
 def load_type_responses():
     type_responses_df = pd.DataFrame(list(models.TypeResponses.objects.all().values()))
-    type_responses_df = type_responses_df.rename(columns={'type_response_id':'type_reponse'})
+    type_responses_df = type_responses_df.rename(columns={'type_response_id':'type_response'})
     return type_responses_df
 
 
@@ -45,14 +45,14 @@ def load_category_master():
 
 
 def global_value_cers():
-    df_results = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='results')
+    df_results = load_results()
     global_value_cers = df_results.loc[df_results.type_company == 'TOTAL', 'result'].mean()
     dict_global_value_cers = {'CERS:':global_value_cers}
     return dict_global_value_cers
 
 def category_value_cers():
-    df_results = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='results')
-    df_category = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='category')
+    df_results = load_results()
+    df_category = load_category()
     df_cat = pd.merge(df_results, df_category, how='left', on='category_id')
     df_cers_categories = pd.DataFrame((df_cat.groupby([df_cat.type_company, df_cat.category_id, df_cat.category_name])['result'].mean()).loc['TOTAL',:])
     df_cers_categories = df_cers_categories.reset_index()
@@ -61,9 +61,9 @@ def category_value_cers():
     return df_cers_categories
 
 def company_mean_total(company_id:int):
-    df_results = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='results')
-    df_type_responses = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='type_responses')
-    df_formularios = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='formularios')
+    df_results = load_results()
+    df_type_responses = load_type_responses()
+    df_formularios = load_formularios()
     df_form =df_formularios[['question_id', 'answer_id', 'company_id']]
     df_resu = df_results[['question_id', 'type_response']]
     df_type= df_type_responses[['type_response', 'answer_id', 'score']]
@@ -75,7 +75,7 @@ def company_mean_total(company_id:int):
 
 
 def ranking():
-    df_companies = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='companies')
+    df_companies = load_companies()
 
     ranking_list = []
     for c_id in df_companies.company_id:
@@ -92,9 +92,9 @@ def ranking():
     return dict_ranking
 
 def company_mean_category(company_id:int):
-    df_results = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='results')
-    df_type_responses = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='type_responses')
-    df_formularios = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='formularios')
+    df_results = load_results()
+    df_type_responses = load_type_responses()
+    df_formularios = load_formularios()
     df_form =df_formularios[['question_id', 'answer_id', 'company_id']]
     df_resu = df_results[['question_id', 'type_response','category_id']]
     df_type= df_type_responses[['type_response', 'answer_id', 'score']]
@@ -121,8 +121,8 @@ def cers_vs_company_categories(company_id: int):
 
 
 def load_form():
-    df_results = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='results')
-    df_type_responses = pd.read_excel('/Users/auxi/Documents/bbdd_project.xlsx', sheet_name='type_responses')
+    df_results = load_results()
+    df_type_responses = load_type_responses()
     df_left_resp = df_results.loc[df_results.type_company=='TOTAL',['question_id','question','type_response']]
     df_right_resp = df_type_responses.loc[:,['type_response','answer_id', 'answer_string']]
     df_merge_resp = pd.merge(df_left_resp, df_right_resp, how='left', on='type_response')
