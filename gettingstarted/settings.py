@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import django_heroku
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -119,5 +118,40 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
+
+import os
+import psycopg2
+import dj_database_url
+
+# os.environ['DATABASE_URL'] = 'ec2-54-160-109-68.compute-1.amazonaws.com'
+# DATABASE_URL = os.environ['DATABASE_URL']
+
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+#
+# DATABASES['default'] = dj_database_url.config(
+#     default='postgres://jhajymmgiqhttu:8ca4405a38b9f877f4cfce776ee11c4f199d95efe1296cfa5a3e745b24427c53@ec2-54-160-109-68.compute-1.amazonaws.com:5432/dd6j1jjt5q002i',
+# )#conn_max_age=600, ssl_require=True)
+
+
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'dd6j1jjt5q002i',
+
+        'USER': 'jhajymmgiqhttu',
+
+        'PASSWORD': '8ca4405a38b9f877f4cfce776ee11c4f199d95efe1296cfa5a3e745b24427c53',
+
+        'HOST': 'ec2-54-160-109-68.compute-1.amazonaws.com',
+
+        'PORT': '5432',
+
+    }
+
+}
+
 
 django_heroku.settings(locals())
