@@ -64,13 +64,16 @@ def company_mean_total(company_id:str):
     df_results = load_results()
     df_type_responses = load_type_responses()
     df_formularios = load_formularios()
-    df_form =df_formularios[['question_id', 'answer_id', 'company_id']]
-    df_resu = df_results[['question_id', 'type_response']]
-    df_type= df_type_responses[['type_response', 'answer_id', 'score']]
-    df_merge_1= pd.merge(df_form,df_resu, how='left', on='question_id')
-    df_merge_total = pd.merge(df_merge_1,df_type, how='left', on=['answer_id','type_response'])
-    company_value = df_merge_total.groupby('company_id').mean()['score'][company_id]
-    dict_value = {company_id: company_value}
+    if df_formularios.company_id.isin([company_id]).any():
+        df_form = df_formularios[['question_id', 'answer_id', 'company_id']]
+        df_resu = df_results[['question_id', 'type_response']]
+        df_type = df_type_responses[['type_response', 'answer_id', 'score']]
+        df_merge_1 = pd.merge(df_form, df_resu, how='left', on='question_id')
+        df_merge_total = pd.merge(df_merge_1, df_type, how='left', on=['answer_id','type_response'])
+        company_value = df_merge_total.groupby('company_id').mean()['score'][company_id]
+        dict_value = {company_id: company_value}
+    else:
+        dict_value = {company_id: 0}
     return dict_value
 
 
