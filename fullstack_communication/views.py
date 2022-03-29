@@ -45,16 +45,27 @@ def post_user(request):
 
 @csrf_exempt
 def post_answers(request):
-    q = dict(request.POST.items())
 
-    q['employee_id'] = int(q['employee_id'])
-    q['question_id'] = int(q['question_id'])
-    q['question_id'] = models.Questions.objects.filter(question_id=q['question_id']).first()
-    q['answer_id'] = int(q['answer_id'])
-    q['company_id'] = models.Companies.objects.filter(company_id=q['company_id']).first()
+    def insert_item(item):
 
-    insert = models.Formularios(**q)
-    insert.save()
+        item['employee_id'] = int(item['employee_id'])
+        item['question_id'] = int(item['question_id'])
+        item['question_id'] = models.Questions.objects.filter(
+            question_id=item['question_id']).first()
+        item['answer_id'] = int(item['answer_id'])
+        item['company_id'] = models.Companies.objects.filter(
+            company_id=item['company_id']).first()
+        insert = models.Formularios(**item)
+        insert.save()
+
+    if request.headers['Content-Type'] == 'application/json':
+        json_loads = json.loads(request.body.decode('ascii'))
+        for item_i in json_loads:
+            insert_item(item_i)
+    else:
+        item_i = dict(request.POST.items())
+        insert_item(item_i)
+
 
     return HttpResponse("Success!!")
 
