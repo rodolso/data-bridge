@@ -30,8 +30,6 @@ def index(request):
 def post_company(request):
     q = dict(request.POST.items())
 
-    q['company_id'] = int(q['company_id'])
-
     insert = models.Companies(**q)
     insert.save()
 
@@ -53,7 +51,6 @@ def post_answers(request):
     q['question_id'] = int(q['question_id'])
     q['question_id'] = models.Questions.objects.filter(question_id=q['question_id']).first()
     q['answer_id'] = int(q['answer_id'])
-    q['company_id'] = int(q['company_id'])
     q['company_id'] = models.Companies.objects.filter(company_id=q['company_id']).first()
 
     insert = models.Formularios(**q)
@@ -74,8 +71,7 @@ def get_ranking(request):
 
 
 def get_stats(request):
-    x = int(request.GET.get("company_id"))
-    print(x, sys.stdout)
-    stats_dict = utils.cers_vs_company_categories(x)
+    company_id = request.GET.get("company_id")
+    stats_dict = utils.cers_vs_company_categories(company_id)
     return JsonResponse(stats_dict, safe=False)
 

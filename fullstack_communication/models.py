@@ -21,7 +21,7 @@ class CategoryMaster(models.Model):
 
 
 class Companies(models.Model):
-    company_id = models.IntegerField(primary_key=True, unique=True)
+    company_id = models.CharField(max_length=30, primary_key=True, unique=True)
     company_name = models.CharField(max_length=20, unique=True)
     type_company = models.CharField(max_length=8)
 

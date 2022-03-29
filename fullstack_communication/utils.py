@@ -60,7 +60,7 @@ def category_value_cers():
     dict_cers_category = df_cers_categories.to_dict(orient='records')
     return df_cers_categories
 
-def company_mean_total(company_id:int):
+def company_mean_total(company_id:str):
     df_results = load_results()
     df_type_responses = load_type_responses()
     df_formularios = load_formularios()
@@ -91,7 +91,7 @@ def ranking():
 
     return dict_ranking
 
-def company_mean_category(company_id:int):
+def company_mean_category(company_id:str):
     df_results = load_results()
     df_type_responses = load_type_responses()
     df_formularios = load_formularios()
@@ -106,7 +106,7 @@ def company_mean_category(company_id:int):
     return company_value
 
 
-def cers_vs_company_categories(company_id: int):
+def cers_vs_company_categories(company_id: str):
     df_cers_categories = category_value_cers()
 
     df_score_result = pd.merge(df_cers_categories, company_mean_category(company_id), how='left', on='category_id')
